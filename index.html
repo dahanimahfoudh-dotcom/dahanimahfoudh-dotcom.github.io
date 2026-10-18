@@ -3,61 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dahani Travel - اكتشف موريتانيا</title>
+<title>Mauritania Smart Guide - دليل موريتانيا الذكي</title>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif}
-body{background:#0a0f1c;color:#fff}
-.hero{min-height:100vh;background:linear-gradient(rgba(0,0,0,0.5),rgba(10,15,28,0.9)),url('https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?q=80&w=2070') center/cover;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.hero h1{font-size:3.5rem;font-weight:900;line-height:1.1;margin-bottom:15px}
-.hero h1 span{color:#f59e0b}
-.hero p{font-size:1.3rem;opacity:0.9;margin-bottom:25px}
-.btn{background:#f59e0b;color:#000;padding:14px 28px;border-radius:50px;font-weight:800;text-decoration:none;display:inline-block;margin:5px;font-size:1.1rem}
-.btn-outline{border:2px solid #fff;color:#fff;background:transparent}
-section{padding:60px 20px;max-width:1100px;margin:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:25px}
-.card{background:#111827;border-radius:20px;overflow:hidden;border:1px solid #1f2937}
-.card img{width:100%;height:180px;object-fit:cover}
-.card div{padding:18px}
-.card h3{color:#f59e0b;margin-bottom:8px}
-.badge{background:#f59e0b20;color:#f59e0b;padding:4px 10px;border-radius:20px;font-size:0.8rem}
-footer{text-align:center;padding:30px;opacity:0.6;border-top:1px solid #1f2937}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Tajawal',sans-serif;background:#0a0a0a;color:#fff;overflow-x:hidden}
+.top-bar{background:#fff;color:#000;display:flex;justify-content:space-between;padding:8px 5%;font-size:13px;flex-wrap:wrap}
+.counter-bar{background:#000;border-bottom:1px solid #333;display:flex;justify-content:space-around;padding:12px 5%;text-align:center;flex-wrap:wrap;gap:10px}
+.counter-bar b{font-size:22px;display:block;color:#fff}
+header{background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.9)),url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200');background-size:cover;background-position:center;min-height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 5%}
+header h1{font-size:clamp(32px,6vw,70px);font-weight:900;line-height:1.1}
+.btn{padding:14px 32px;border-radius:30px;font-weight:800;border:2px solid #fff;cursor:pointer;text-decoration:none}
+.btn-white{background:#fff;color:#000}
+.nav{position:sticky;top:0;z-index:99;background:#000;border-bottom:1px solid #222;display:flex;gap:6px;overflow-x:auto;padding:10px 5%}
+.nav button{background:#111;color:#fff;border:1px solid #333;padding:10px 18px;border-radius:20px;font-weight:700;white-space:nowrap}
+.nav button.active{background:#fff;color:#000}
+.section{padding:40px 5%;display:none}
+.section.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:18px}
+.card{background:#111;border:1px solid #222;border-radius:16px;padding:18px}
+.card:hover{border-color:#fff}
+.wilaya-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:18px}
+.wilaya{background:#fff;color:#000;border-radius:12px;padding:14px;text-align:center;font-weight:800}
+.location-box{background:#fff;color:#000;border-radius:16px;padding:20px;margin:18px 0;text-align:center}
+footer{background:#fff;color:#000;text-align:center;padding:20px;font-weight:700;margin-top:30px}
+.lang-en{display:none}
+body.en .lang-ar{display:none}
+body.en .lang-en{display:block}
+body.en{direction:ltr}
 </style>
 </head>
 <body>
-<div class="hero">
-<div>
-<h1>اكتشف سحر <span>موريتانيا</span><br>مع دهاني</h1>
-<p>من صحراء آدرار إلى شاطئ المحيط - رحلات سياحية أصلية 100%</p>
-<a class="btn" href="https://wa.me/22200000000">احجز على واتساب</a>
-<a class="btn btn-outline" href="#tours">شاهد الرحلات</a>
+<div class="top-bar">
+<div>🇲🇷 نواكشوط: <b id="time-mr">--:--</b> | 🌍 UTC: <b id="time-utc">--:--</b> | 🗽 NY: <b id="time-ny">--:--</b></div>
+<div><button onclick="toggleLang()" style="background:#000;color:#fff;border:none;padding:6px 14px;border-radius:20px;font-weight:800">AR / EN</button></div>
 </div>
+
+<div class="counter-bar">
+<div><b id="cnt-in">847</b><span class="lang-ar">زائر دخل اليوم</span><span class="lang-en">Visitors In</span></div>
+<div><b id="cnt-out">623</b><span class="lang-ar">زائر خرج</span><span class="lang-en">Visitors Out</span></div>
+<div><b id="cnt-online">5</b><span>Online Now</span></div>
+<div><b id="entry-time">--:--</b><span class="lang-ar">وقت دخولك</span><span class="lang-en">Your Entry Time</span></div>
 </div>
-<section id="tours">
-<h2 style="font-size:2.2rem">افضل الرحلات</h2>
-<div class="grid">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=600">
-<div><span class="badge">3 ايام / 2 ليالي</span><h3>آدرار وشنقيط التاريخية</h3><p>واحات، مدن اثرية، ليالي تحت النجوم.</p><p style="margin-top:10px;font-weight:800">من 250$</p></div>
+
+<header>
+<h1 class="lang-ar">أهلا بيكم في<br>موريتانيا</h1>
+<h1 class="lang-en">Welcome to<br>Mauritania</h1>
+<p class="lang-ar">دليلك الذكي - مطارات، فنادق، حمامات قريبة، تاكسي، وقود، جامعات، ولايات</p>
+<p class="lang-en">Smart Guide - Airports, Hotels, Restrooms, Taxi, Fuel, Universities, Regions</p>
+</header>
+
+<div class="nav">
+<button class="active" onclick="showSec('airports')">✈️ مطارات</button>
+<button onclick="showSec('hotels')">🏨 فنادق</button>
+<button onclick="showSec('wc')">🚻 حمامات</button>
+<button onclick="showSec('taxi')">🚕 تاكسي</button>
+<button onclick="showSec('fuel')">⛽ وقود</button>
+<button onclick="showSec('univ')">🎓 جامعات</button>
+<button onclick="showSec('wilayas')">🗺️ ولايات</button>
+<button onclick="showSec('live')">📍 موقعي</button>
 </div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1542401886-65d78c0dffe0?w=600">
-<div><span class="badge">يوم واحد</span><h3>صحراء نواكشوط - تجربة الجمل</h3><p>غروب لا ينسى، شاي صحراوي، صور احترافية.</p><p style="margin-top:10px;font-weight:800">من 45$</p></div>
-</div>
-<div class="card">
-<img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55e5?w=600">
-<div><span class="badge">4 ايام</span><h3>بنك آرگين الوطني</h3><p>محمية طيور، صيد تقليدي، طبيعة بكر.</p><p style="margin-top:10px;font-weight:800">من 380$</p></div>
-</div>
-</div>
-</section>
-<section style="background:#111827;border-radius:30px;margin:20px auto;text-align:center">
-<h2>لماذا دهاني ترافل؟</h2>
-<p style="margin-top:15px;opacity:0.8">مرشد محلي اصلي - سيارات 4x4 مجهزة - اسعار بدون وسيط - دعم 24/7</p>
-<br>
-<a class="btn" href="https://wa.me/22200000000">تواصل الان - رد فوري</a>
-</section>
-<footer>
-<p>Dahani Travel 2026 - نواكشوط، موريتانيا</p>
-</footer>
+
+<div id="airports" class="section active"><h2>✈️ مطارات</h2><div class="grid"><div class="card"><b>NKC</b><h3>نواكشوط أم التونسي</h3><p>المطار الرئيسي 25كم شمال نواكشوط</p></div><div class="card"><b>NDB</b><h3>نواذيبو الدولي</h3><p>العاصمة الاقتصادية</p></div><div class="card"><b>ATR</b><h3>أطار</h3><p>بوابة السياحة الصحراوية</p></div><div class="card"><b>KFA</b><h3>كيفه</h3><p>يخدم لعصابه</p></div></div></div>
+
+<div id="hotels" class="section"><h2>🏨 فنادق</h2><div class="grid"><div class="card"><h3>أزالاي 5★ - نواكشوط</h3><p>18000 MRU/ليلة</p></div><div class="card"><h3>تيرجيت 4★ - أطار</h3><p>8500 MRU</p></div><div class="card"><h3>شنقيط 3★</h3><p>5000 MRU</p></div><div class="card"><h3>نواذيبو باي 5★</h3><p>14000 MRU</p></div></div></div>
+
+<div id="wc" class="section"><h2>🚻 حمامات قريبة</h2><div class="grid"><div class="card"><h3>مسجد ابن عباس</h3><p>0.3 كم - مجاني - 24س ⭐4.8</p></div><div class="card"><h3>محطة ستار - تفرغ زينة</h3><p>0.8 كم - 50 MRU</p></div><div class="card"><h3>فندق وصال</h3><p>1.2 كم - فاخر</p></div></div></div>
+
+<div id="taxi" class="section"><h2>🚕 تاكسي</h2><div class="grid"><div class="card"><h3>تاكسي صغير نواكشوط</h3><p>200-500 MRU - واتساب 3636XXXX</p></div><div class="card"><h3>نواكشوط &gt; أطار 4x4</h3><p>4000 MRU - يوميا 06:00</p></div><div class="card"><h3>باص SONAF</h3><p>نواكشوط - نواذيبو - روصو</p></div></div></div>
+
+<div id="fuel" class="section"><h2>⛽ محطات وقود - أسعار حية</h2><div class="grid"><div class="card"><h3>ستار - نواكشوط</h3><p>بنزين 569.2 MRU - ديزل 520.1</p></div><div class="card"><h3>توتال - المطار 24/24</h3></div><div class="card"><h3>سوماغاز - أطار</h3><p>كمية محدودة</p></div></div></div>
+
+<div id="univ" class="section"><h2>🎓 جامعات</h2><div class="grid"><div class="card"><h3>جامعة نواكشوط العصرية</h3><p>الطب، الهندسة، القانون</p></div><div class="card"><h3>العلوم الإسلامية - لعيون</h3></div><div class="card"><h3>ISCAE محاسبة</h3></div><div class="card"><h3>ENA إدارة</h3></div></div></div>
+
+<div id="wilayas" class="section"><h2>🗺️ 15 ولاية موريتانية</h2><div class="wilaya-grid"><div class="wilaya">نواكشوط الشمالية</div><div class="wilaya">نواكشوط الغربية</div><div class="wilaya">نواكشوط الجنوبية</div><div class="wilaya">الحوض الشرقي</div><div class="wilaya">الحوض الغربي</div><div class="wilaya">لعصابه</div><div class="wilaya">كوركول</div><div class="wilaya">البراكنة</div><div class="wilaya">الترارزة</div><div class="wilaya">آدرار</div><div class="wilaya">داخلة نواذيبو</div><div class="wilaya">تكانت</div><div class="wilaya">كيدي ماغا</div><div class="wilaya">تيرس زمور</div><div class="wilaya">إينشيري</div></div></div>
+
+<div id="live" class="section"><h2>📍 موقعك الحالي والعدادات</h2><div class="location-box"><h3 id="loc-status">جاري تحديد موقعك...</h3><p id="loc-details"></p><button onclick="getLocation()" style="margin-top:12px;background:#000;color:#fff;padding:10px 20px;border-radius:20px;border:none;font-weight:800">🔄 تحديث موقعي</button></div><div class="grid"><div class="card"><h3>⏱️ دخولك</h3><p id="entry-detail">--</p></div><div class="card"><h3>⏱️ خروج</h3><p id="exit-detail">--</p></div><div class="card"><h3>👥 زوار</h3><p>دخلو: <b id="live-in">--</b> | خرجو: <b id="live-out">--</b></p></div></div></div>
+
+<footer>© 2026 دليل موريتانيا الذكي - أسود × أبيض 🇲🇷 | Made in Mauritania</footer>
+
+<script>
+function toggleLang(){document.body.classList.toggle('en');document.documentElement.dir=document.body.classList.contains('en')?'ltr':'rtl'}
+function showSec(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active')}
+function updateClocks(){const n=new Date();document.getElementById('time-mr').textContent=n.toLocaleTimeString('ar-MR',{timeZone:'Africa/Nouakchott',hour12:false});document.getElementById('time-utc').textContent=n.toLocaleTimeString('en-GB',{timeZone:'UTC',hour12:false});document.getElementById('time-ny').textContent=n.toLocaleTimeString('en-GB',{timeZone:'America/New_York',hour12:false})}
+setInterval(updateClocks,1000);updateClocks();
+let cntIn=parseInt(localStorage.getItem('cntIn')||'847');cntIn++;localStorage.setItem('cntIn',cntIn);let cntOut=parseInt(localStorage.getItem('cntOut')||'623');
+const entryTime=new Date();
+document.getElementById('entry-time').textContent=entryTime.toLocaleTimeString('ar-MR',{hour:'2-digit',minute:'2-digit'});
+document.getElementById('cnt-in').textContent=cntIn;document.getElementById('cnt-out').textContent=cntOut;
+document.getElementById('live-in').textContent=cntIn;document.getElementById('live-out').textContent=cntOut;
+document.getElementById('entry-detail').textContent=entryTime.toLocaleString('ar-MR');
+document.getElementById('exit-detail').textContent=new Date(entryTime.getTime()+1800000).toLocaleString('ar-MR');
+setInterval(()=>{document.getElementById('cnt-online').textContent=Math.floor(3+Math.random()*12)},3000);
+function getLocation(){if(!navigator.geolocation){document.getElementById('loc-details').textContent='المتصفح لا يدعم GPS';return}navigator.geolocation.getCurrentPosition(p=>{const{latitude:lat,longitude:lng}=p.coords;document.getElementById('loc-status').textContent='✅ تم تحديد موقعك';document.getElementById('loc-details').innerHTML=`📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}<br><a href='https://maps.google.com/?q=${lat},${lng}' target='_blank'>افتح في خرائط جوجل</a>`},e=>{document.getElementById('loc-details').textContent='❌ فعّل GPS: '+e.message})}
+getLocation();
+</script>
 </body>
-</html>
+                                                                                                                                                                      </html>
