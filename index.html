@@ -8,95 +8,113 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Tajawal',sans-serif;background:#0a0a0a;color:#fff}
-.top-bar{background:#fff;color:#000;display:flex;justify-content:space-between;padding:8px 5%;font-size:13px}
+.top-bar{background:#fff;color:#000;display:flex;justify-content:space-between;padding:8px 5%;font-size:13px;flex-wrap:wrap;gap:5px}
 .counter-bar{background:#000;border-bottom:1px solid #333;display:flex;justify-content:space-around;padding:12px 5%;text-align:center;flex-wrap:wrap;gap:10px}
 .counter-bar b{font-size:22px;display:block}
-header{background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.85)),url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200');background-size:cover;background-position:center;min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 5%}
-header h1{font-size:clamp(34px,7vw,72px);font-weight:900;line-height:1.05;margin-bottom:15px}
-/* أزرار اللغة الكبيرة الجديدة */
-.lang-switcher{display:flex;gap:15px;margin:25px 0;justify-content:center;flex-wrap:wrap}
-.lang-btn{padding:18px 45px;border-radius:50px;font-size:22px;font-weight:900;cursor:pointer;border:3px solid #fff;transition:.3s;min-width:160px}
+header{background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.9)),url('https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200');background-size:cover;background-position:center;min-height:85vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:30px 5%}
+header h1{font-size:clamp(32px,7vw,70px);font-weight:900;line-height:1.1;margin-bottom:15px}
+.lang-switcher{display:flex;gap:16px;margin:25px 0;justify-content:center;flex-wrap:wrap}
+.lang-btn{padding:18px 50px;border-radius:50px;font-size:24px;font-weight:900;cursor:pointer;border:3px solid #fff;transition:.2s;min-width:170px}
 .lang-btn-ar{background:#fff;color:#000}
 .lang-btn-en{background:transparent;color:#fff}
 .lang-btn:hover{transform:scale(1.05)}
-.lang-btn.active-ar{background:#fff;color:#000;box-shadow:0 0 20px rgba(255,255,255,.5)}
-.lang-btn.active-en{background:#fff;color:#000}
 .nav{position:sticky;top:0;z-index:99;background:#000;border-bottom:1px solid #222;display:flex;gap:6px;overflow-x:auto;padding:10px 5%}
-.nav button{background:#111;color:#fff;border:1px solid #333;padding:10px 18px;border-radius:20px;font-weight:700;white-space:nowrap}
+.nav button{background:#111;color:#fff;border:1px solid #333;padding:10px 18px;border-radius:20px;font-weight:700;white-space:nowrap;cursor:pointer}
 .nav button.active{background:#fff;color:#000}
 .section{padding:40px 5%;display:none}.section.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:18px}
 .card{background:#111;border:1px solid #222;border-radius:16px;padding:18px}
-.wilaya-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:18px}
-.wilaya{background:#fff;color:#000;border-radius:12px;padding:14px;text-align:center;font-weight:800}
-.location-box{background:#fff;color:#000;border-radius:16px;padding:20px;margin:18px 0;text-align:center}
 footer{background:#fff;color:#000;text-align:center;padding:20px;font-weight:700;margin-top:30px}
-.lang-en{display:none}
-body.en .lang-ar{display:none}
-body.en .lang-en{display:block}
-body.en{direction:ltr}
+/* إصلاح اللغة */
+.lang-en{display:none !important}
+.lang-ar{display:block}
+body.en .lang-ar{display:none !important}
+body.en .lang-en{display:block !important}
+body.en{direction:ltr !important}
+body.en .lang-switcher{flex-direction:row-reverse}
 body.ar .lang-btn-ar{background:#fff;color:#000}
-body.ar .lang-btn-en{background:transparent;color:#fff;border-color:#fff}
-body.en .lang-btn-en{background:#fff;color:#000}
-body.en .lang-btn-ar{background:transparent;color:#fff;border-color:#fff}
+body.ar .lang-btn-en{background:transparent;color:#fff}
+body.en .lang-btn-en{background:#fff;color:#000;box-shadow:0 0 20px rgba(255,255,255,.6)}
+body.en .lang-btn-ar{background:transparent;color:#fff}
 </style>
 </head>
 <body class="ar">
 <div class="top-bar">
-<div>🇲🇷 نواكشوط: <b id="time-mr">--:--</b> | 🌍 UTC: <b id="time-utc">--:--</b> | 🗽 NY: <b id="time-ny">--:--</b></div>
-<div style="font-weight:800">دليل موريتانيا الذكي</div>
+<div><span class="lang-ar">🇲🇷 نواكشوط:</span><span class="lang-en">🇲🇷 Nouakchott:</span> <b id="time-mr">--:--</b> | 🌍 UTC: <b id="time-utc">--:--</b> | 🗽 NY: <b id="time-ny">--:--</b></div>
+<div style="font-weight:800"><span class="lang-ar">دليل موريتانيا الذكي</span><span class="lang-en">Mauritania Smart Guide</span></div>
 </div>
+
 <div class="counter-bar">
-<div><b>848</b><span class="lang-ar">زائر دخل اليوم</span><span class="lang-en">Visitors In</span></div>
+<div><b>848</b><span class="lang-ar">زائر دخل</span><span class="lang-en">Visitors In</span></div>
 <div><b>623</b><span class="lang-ar">زائر خرج</span><span class="lang-en">Visitors Out</span></div>
-<div><b id="cnt-online">5</b><span>Online Now</span></div>
-<div><b>10:35 م</b><span class="lang-ar">وقت دخولك</span><span class="lang-en">Entry Time</span></div>
+<div><b id="cnt-online">5</b><span> Online</span></div>
 </div>
 
 <header>
 <h1 class="lang-ar">أهلا بيكم في<br>موريتانيا</h1>
 <h1 class="lang-en">Welcome to<br>Mauritania</h1>
 
-<!-- أزرار اللغة الكبيرة الواضحة -->
 <div class="lang-switcher">
-<button class="lang-btn lang-btn-ar active-ar" onclick="setLang('ar')">🇲🇷 العربية</button>
+<button class="lang-btn lang-btn-ar" onclick="setLang('ar')">🇲🇷 العربية</button>
 <button class="lang-btn lang-btn-en" onclick="setLang('en')">🇬🇧 English</button>
 </div>
 
-<p class="lang-ar">دليلك الذكي - مطارات، فنادق، حمامات قريبة، تاكسي، وقود، جامعات، ولايات</p>
-<p class="lang-en">Smart Guide - Airports, Hotels, Restrooms, Taxi, Fuel, Universities, Regions</p>
+<p class="lang-ar">دليلك الذكي - مطارات، فنادق، حمامات، تاكسي، وقود، ولايات</p>
+<p class="lang-en">Your Smart Guide - Airports, Hotels, Restrooms, Taxi, Fuel, Regions</p>
 </header>
 
 <div class="nav">
-<button class="active" onclick="showSec('airports')">✈️ مطارات</button>
-<button onclick="showSec('hotels')">🏨 فنادق</button>
-<button onclick="showSec('wc')">🚻 حمامات</button>
-<button onclick="showSec('taxi')">🚕 تاكسي</button>
-<button onclick="showSec('fuel')">⛽ وقود</button>
-<button onclick="showSec('univ')">🎓 جامعات</button>
-<button onclick="showSec('wilayas')">🗺️ ولايات</button>
-<button onclick="showSec('live')">📍 موقعي</button>
+<button class="active" onclick="showSec('airports',this)"><span class="lang-ar">✈️ مطارات</span><span class="lang-en">✈️ Airports</span></button>
+<button onclick="showSec('hotels',this)"><span class="lang-ar">🏨 فنادق</span><span class="lang-en">🏨 Hotels</span></button>
+<button onclick="showSec('wc',this)"><span class="lang-ar">🚻 حمامات</span><span class="lang-en">🚻 Restrooms</span></button>
+<button onclick="showSec('taxi',this)"><span class="lang-ar">🚕 تاكسي</span><span class="lang-en">🚕 Taxi</span></button>
+<button onclick="showSec('fuel',this)"><span class="lang-ar">⛽ وقود</span><span class="lang-en">⛽ Fuel</span></button>
+<button onclick="showSec('wilayas',this)"><span class="lang-ar">🗺️ ولايات</span><span class="lang-en">🗺️ Regions</span></button>
 </div>
 
-<div id="airports" class="section active"><h2>✈️ مطارات</h2><div class="grid"><div class="card"><b>NKC</b><h3>نواكشوط أم التونسي</h3><p>المطار الرئيسي</p></div><div class="card"><b>NDB</b><h3>نواذيبو الدولي</h3></div><div class="card"><b>ATR</b><h3>أطار</h3></div><div class="card"><b>KFA</b><h3>كيفه</h3></div></div></div>
-<div id="hotels" class="section"><h2>🏨 فنادق</h2><div class="grid"><div class="card"><h3>أزالاي 5★</h3><p>18000 MRU</p></div><div class="card"><h3>تيرجيت 4★</h3><p>8500 MRU</p></div></div></div>
-<div id="wc" class="section"><h2>🚻 حمامات قريبة</h2><div class="grid"><div class="card"><h3>مسجد ابن عباس</h3><p>0.3 كم - مجاني</p></div></div></div>
-<div id="taxi" class="section"><h2>🚕 تاكسي</h2><div class="grid"><div class="card"><h3>تاكسي صغير</h3><p>200-500 MRU</p></div></div></div>
-<div id="fuel" class="section"><h2>⛽ وقود</h2><div class="grid"><div class="card"><h3>ستار - نواكشوط</h3><p>569.2 MRU</p></div></div></div>
-<div id="univ" class="section"><h2>🎓 جامعات</h2><div class="grid"><div class="card"><h3>جامعة نواكشوط</h3></div></div></div>
-<div id="wilayas" class="section"><h2>🗺️ 15 ولاية</h2><div class="wilaya-grid"><div class="wilaya">نواكشوط</div><div class="wilaya">الحوض الشرقي</div><div class="wilaya">آدرار</div><div class="wilaya">تكانت</div><div class="wilaya">تيرس زمور</div><div class="wilaya">إينشيري</div><div class="wilaya">نواذيبو</div><div class="wilaya">الترارزة</div><div class="wilaya">البراكنة</div><div class="wilaya">لعصابه</div><div class="wilaya">كوركول</div><div class="wilaya">كيدي ماغا</div><div class="wilaya">الحوض الغربي</div><div class="wilaya">تكانت</div><div class="wilaya">لعيون</div></div></div>
-<div id="live" class="section"><h2>📍 موقعك</h2><div class="location-box"><h3 id="loc-status">جاري تحديد موقعك...</h3><p id="loc-details"></p><button onclick="getLocation()" style="margin-top:12px;background:#000;color:#fff;padding:10px 20px;border-radius:20px;border:none;font-weight:800">🔄 تحديث موقعي</button></div></div>
+<div id="airports" class="section active">
+<h2><span class="lang-ar">✈️ مطارات موريتانيا</span><span class="lang-en">✈️ Mauritania Airports</span></h2>
+<div class="grid"><div class="card"><b>NKC - Nouakchott</b><br><span class="lang-ar">مطار أم التونسي الدولي</span><span class="lang-en">Oumtounsy International</span></div><div class="card"><b>NDB - Nouadhibou</b></div><div class="card"><b>ATR - Atar</b></div><div class="card"><b>KFA - Kiffa</b></div></div>
+</div>
 
-<footer>© 2026 دليل موريتانيا الذكي 🇲🇷</footer>
+<div id="hotels" class="section">
+<h2><span class="lang-ar">🏨 فنادق</span><span class="lang-en">🏨 Hotels</span></h2>
+<div class="grid"><div class="card">Azalai Hotel 5★ - 18000 MRU</div><div class="card">Tergit Hotel 4★ - 8500 MRU</div></div>
+</div>
+
+<div id="wc" class="section"><h2>🚻 Restrooms / حمامات</h2><div class="grid"><div class="card">Ibn Abbas Mosque - 0.3km Free</div></div></div>
+<div id="taxi" class="section"><h2>🚕 Taxi / تاكسي</h2><div class="grid"><div class="card"><span class="lang-ar">تاكسي صغير 200-500 MRU</span><span class="lang-en">Small Taxi 200-500 MRU</span></div></div></div>
+<div id="fuel" class="section"><h2>⛽ Fuel / وقود</h2><div class="grid"><div class="card">Star Fuel - 569.2 MRU</div></div></div>
+<div id="wilayas" class="section"><h2>🗺️ 15 Wilayas / ولايات</h2><div class="grid"><div class="card">Nouakchott / نواكشوط</div><div class="card">Adrar / آدرار</div><div class="card">Tagant / تكانت</div></div></div>
+
+<footer>© 2026 Mauritania Smart Guide 🇲🇷</footer>
 
 <script>
-function setLang(l){document.body.className=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.documentElement.lang=l}
-function showSec(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));event.target.classList.add('active')}
-function updateClocks(){const n=new Date();document.getElementById('time-mr').textContent=n.toLocaleTimeString('ar-MR',{timeZone:'Africa/Nouakchott',hour12:false});document.getElementById('time-utc').textContent=n.toLocaleTimeString('en-GB',{timeZone:'UTC',hour12:false});document.getElementById('time-ny').textContent=n.toLocaleTimeString('en-GB',{timeZone:'America/New_York',hour12:false})}
+function setLang(l){
+  document.body.className=l;
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  localStorage.setItem('siteLang',l);
+}
+function showSec(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+function updateClocks(){
+  const n=new Date();
+  const el1=document.getElementById('time-mr');
+  const el2=document.getElementById('time-utc');
+  const el3=document.getElementById('time-ny');
+  if(el1) el1.textContent=n.toLocaleTimeString('en-GB',{timeZone:'Africa/Nouakchott',hour12:false});
+  if(el2) el2.textContent=n.toLocaleTimeString('en-GB',{timeZone:'UTC',hour12:false});
+  if(el3) el3.textContent=n.toLocaleTimeString('en-GB',{timeZone:'America/New_York',hour12:false});
+}
 setInterval(updateClocks,1000);updateClocks();
-setInterval(()=>{document.getElementById('cnt-online').textContent=Math.floor(3+Math.random()*12)},3000);
-function getLocation(){if(!navigator.geolocation){document.getElementById('loc-details').textContent='المتصفح لا يدعم GPS';return}navigator.geolocation.getCurrentPosition(p=>{const{latitude:lat,longitude:lng}=p.coords;document.getElementById('loc-status').textContent='✅ تم تحديد موقعك';document.getElementById('loc-details').innerHTML=`📍 ${lat.toFixed(5)}, ${lng.toFixed(5)}<br><a href='https://maps.google.com/?q=${lat},${lng}' target='_blank'>افتح في خرائط جوجل</a>`},e=>{document.getElementById('loc-details').textContent='❌ فعّل GPS: '+e.message})}
-getLocation();
+// حفظ اللغة
+const saved=localStorage.getItem('siteLang');
+if(saved) setLang(saved);
 </script>
 </body>
 </html>
